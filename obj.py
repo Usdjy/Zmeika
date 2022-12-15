@@ -2,6 +2,8 @@ from constants import *
 import pygame
 import random
 
+pygame.init()
+
 
 class Food:
     def __init__(self):
@@ -19,6 +21,15 @@ class Food:
     def draw(self):
         if not self.eaten:
             pygame.draw.rect(dis, green, [self.x, self.y, snake_block, snake_block])
+
+
+class Rocks:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def draw(self):
+        pygame.draw.rect(dis, black, [self.x, self.y, snake_block, snake_block])
 
 
 class Snake:
@@ -69,3 +80,26 @@ class Snake:
     def draw(self):
         for x in self.parts:
             pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block])
+
+
+class Button():
+    def __init__(self, x=0, y=0, name="Level"):
+        self.name = name
+        self.chosen = False
+        self.x = x
+        self.y = y
+
+    def draw(self):
+        if self.chosen:
+            pygame.draw.rect(dis, yellow, [self.x - 10, self.y - 10, dis_width / 4 + 20, dis_height / 8 + 20])
+            pygame.draw.rect(dis, black, [self.x, self.y, dis_width / 4, dis_height / 8])
+        if not self.chosen:
+            pygame.draw.rect(dis, black, [self.x, self.y, dis_width / 4, dis_height / 8])
+
+
+"working with buttons"
+buttons = list()
+buttons.append(Button(dis_width / 3, dis_height / 8, "Level 0"))
+buttons[0].chosen = True
+buttons.append(Button(dis_width / 3, 5 * dis_height / 16, "Level 1"))
+buttons.append(Button(dis_width / 3, dis_height / 2, "Level 2"))
