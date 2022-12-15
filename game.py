@@ -1,6 +1,5 @@
 from obj import Food, Snake
 from constants import *
-
 pygame.init()
 
 
@@ -36,7 +35,6 @@ def gameon():
                         snake.alive = True
                     if event.key == pygame.K_c:
                         gameon()
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_over = True
@@ -47,17 +45,14 @@ def gameon():
         snake.evolve()
         food.draw()
         snake.draw()
+
         score_write(snake.len - 1)
         pygame.display.update()
 
         if food.check_life(snake.Head[0], snake.Head[1]):
             snake.len += 1
             food = Food()
-
         clock.tick(snake_speed)
-
     pygame.quit()
     quit()
-
-
 gameon()
