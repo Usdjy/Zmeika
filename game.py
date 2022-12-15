@@ -1,13 +1,20 @@
-from obj import Food, Snake, buttons
+from obj import Food, Snake, buttons, Rock
 from constants import *
 from text import *
-
+from maps import maps
 pygame.init()
 def getrocks(level):
+    rocks = list()
+    for i in range(0, dis_height//snake_block):
+        for j in range (0, dis_width//snake_block):
+            if maps[level][i][j] == 1:
+                rocks.append(Rock(j*10, i*10))
+    return rocks
 
 
 def menu():
     "function responsible for the menu stage."
+    buttons[0].chosen = True
     menu_closed = False
     level = 0
     while not menu_closed:
@@ -35,9 +42,9 @@ def menu():
 def gameon(level):
     "function, which launches the gameplay."
     game_over = False
-
+    rocks = getrocks(level)
     snake = Snake()
-    food = Food()
+    food = Food(maps[level])
 
     while not game_over:
 
@@ -51,6 +58,7 @@ def gameon(level):
                     if event.key == pygame.K_q:
                         game_over = True
                         snake.alive = True
+                        buttons[level].chosen = False
                         menu()
                     if event.key == pygame.K_c:
                         gameon(level)
@@ -61,16 +69,19 @@ def gameon(level):
             snake.turn(event)
         snake.check_border()
         snake.check_suicide()
+        snake.check_rocks(rocks)
         dis.fill(blue)
         snake.evolve()
         food.draw()
         snake.draw()
         score_write(snake.len - 1)
+        for rock in rocks:
+            rock.draw()
         pygame.display.update()
 
         if food.check_life(snake.Head[0], snake.Head[1]):
             snake.len += 1
-            food = Food()
+            food = Food(maps[level])
 
         clock.tick(snake_speed)
 

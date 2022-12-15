@@ -6,9 +6,15 @@ pygame.init()
 
 
 class Food:
-    def __init__(self):
-        self.x = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
-        self.y = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
+    def __init__(self, map):
+        chosen = False
+        while not chosen:
+            x = random.randint(0, dis_width / snake_block - 1)
+            y = random.randint(0, dis_height / snake_block - 1)
+            if map[y][x] == 0:
+                self.x = x * 10
+                self.y = y * 10
+                chosen = True
         self.pts = 1
         self.eaten = False
 
@@ -23,7 +29,7 @@ class Food:
             pygame.draw.rect(dis, green, [self.x, self.y, snake_block, snake_block])
 
 
-class Rocks:
+class Rock:
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -73,13 +79,18 @@ class Snake:
             if x == self.Head:
                 self.alive = False
 
+    def check_rocks(self, rocks):
+        for rock in rocks:
+            if rock.x  == self.Head[0] and rock.y  == self.Head[1]:
+                self.alive = False
+
     def check_border(self):
         if self.Head[0] >= dis_width or self.Head[0] < 0 or self.Head[1] >= dis_height or self.Head[1] < 0:
             self.alive = False
 
     def draw(self):
         for x in self.parts:
-            pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block])
+            pygame.draw.rect(dis, red, [x[0], x[1], snake_block, snake_block])
 
 
 class Button():
@@ -100,6 +111,5 @@ class Button():
 "working with buttons"
 buttons = list()
 buttons.append(Button(dis_width / 3, dis_height / 8, "Level 0"))
-buttons[0].chosen = True
 buttons.append(Button(dis_width / 3, 5 * dis_height / 16, "Level 1"))
 buttons.append(Button(dis_width / 3, dis_height / 2, "Level 2"))
