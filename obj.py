@@ -49,19 +49,20 @@ class Snake:
         self.dy = 0
         self.len = 1
         self.alive = True
+        self.speed = snake_basespeed
 
     def turn(self, event):
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_a:
                 self.dx = -snake_block
                 self.dy = 0
-            elif event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_d:
                 self.dx = snake_block
                 self.dy = 0
-            elif event.key == pygame.K_UP:
+            elif event.key == pygame.K_w:
                 self.dy = -snake_block
                 self.dx = 0
-            elif event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_s:
                 self.dy = snake_block
                 self.dx = 0
 

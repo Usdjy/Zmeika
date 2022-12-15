@@ -47,6 +47,7 @@ def gameon(level):
     game_over = False
     rocks = getrocks(level)
     snake = Snake()
+    snake.speed += 5*level
     food = Food(maps[level])
 
     while not game_over:
@@ -87,9 +88,10 @@ def gameon(level):
 
         if food.check_life(snake.Head[0], snake.Head[1]):
             snake.len += 1
+            snake.speed += 1
             food = Food(maps[level])
 
-        clock.tick(snake_speed)
+        clock.tick(snake.speed)
 
     pygame.quit()
     quit()

@@ -12,6 +12,6 @@ dis_height = 400
 dis = pygame.display.set_mode((dis_width, dis_height))
 clock = pygame.time.Clock()
 snake_block = 10
-snake_speed = 15
+snake_basespeed = 5
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 15)
