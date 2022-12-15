@@ -5,9 +5,9 @@ pygame.init()
 from constants import *
 
 
-def message(str, color):
+def message(str, color, x, y):
     msg = font_style.render(str, True, color)
-    dis.blit(msg, [dis_width / 40, dis_height / 3])
+    dis.blit(msg, [x, y])
 
 
 def score_write(score):

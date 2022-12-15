@@ -1,6 +1,7 @@
 from constants import *
 import pygame
 import random
+from text import *
 
 pygame.init()
 
@@ -9,8 +10,8 @@ class Food:
     def __init__(self, map):
         chosen = False
         while not chosen:
-            x = random.randint(0, dis_width / snake_block - 1)
-            y = random.randint(0, dis_height / snake_block - 1)
+            x = random.randint(6, dis_width / snake_block - 1)
+            y = random.randint(3, dis_height / snake_block - 1)
             if map[y][x] == 0:
                 self.x = x * 10
                 self.y = y * 10
@@ -81,7 +82,7 @@ class Snake:
 
     def check_rocks(self, rocks):
         for rock in rocks:
-            if rock.x  == self.Head[0] and rock.y  == self.Head[1]:
+            if rock.x == self.Head[0] and rock.y == self.Head[1]:
                 self.alive = False
 
     def check_border(self):
@@ -93,7 +94,7 @@ class Snake:
             pygame.draw.rect(dis, red, [x[0], x[1], snake_block, snake_block])
 
 
-class Button():
+class Button:
     def __init__(self, x=0, y=0, name="Level"):
         self.name = name
         self.chosen = False
@@ -104,8 +105,10 @@ class Button():
         if self.chosen:
             pygame.draw.rect(dis, yellow, [self.x - 10, self.y - 10, dis_width / 4 + 20, dis_height / 8 + 20])
             pygame.draw.rect(dis, black, [self.x, self.y, dis_width / 4, dis_height / 8])
+            message(self.name, white, self.x + 40, self.y + 10)
         if not self.chosen:
             pygame.draw.rect(dis, black, [self.x, self.y, dis_width / 4, dis_height / 8])
+            message(self.name, white, self.x + 20, self.y + 20)
 
 
 "working with buttons"

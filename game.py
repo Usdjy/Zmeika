@@ -2,13 +2,16 @@ from obj import Food, Snake, buttons, Rock
 from constants import *
 from text import *
 from maps import maps
+
 pygame.init()
+
+
 def getrocks(level):
     rocks = list()
-    for i in range(0, dis_height//snake_block):
-        for j in range (0, dis_width//snake_block):
+    for i in range(0, dis_height // snake_block):
+        for j in range(0, dis_width // snake_block):
             if maps[level][i][j] == 1:
-                rocks.append(Rock(j*10, i*10))
+                rocks.append(Rock(j * 10, i * 10))
     return rocks
 
 
@@ -50,7 +53,7 @@ def gameon(level):
 
         while not snake.alive:
             dis.fill(blue)
-            message("You lost, your score is " + str(snake.len - 1) + ", type C to restart, ""Q to quit", black)
+            message("You lost, your score is " + str(snake.len - 1) + ", type C to restart, ""Q to quit", black, dis_width / 40, dis_height / 3)
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -62,6 +65,9 @@ def gameon(level):
                         menu()
                     if event.key == pygame.K_c:
                         gameon(level)
+                if event.type == pygame.QUIT:
+                    game_over = True
+                    snake.alive = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
