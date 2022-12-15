@@ -4,9 +4,20 @@ from constants import *
 pygame.init()
 
 
+def message(str, color):
+   msg = font_style.render(str, True, color)
+   dis.blit(msg, [dis_width/40, dis_height / 3])
+
+
+def score_write(score):
+   value = score_font.render("Your Score: " + str(score), True, yellow)
+   dis.blit(value, [0, 0]) #- отображение счета.
+
+
 def gameon():
     "function, which launches the gameplay."
     game_over = False
+
 
     snake = Snake()
     food = Food()
@@ -15,6 +26,7 @@ def gameon():
 
         while not snake.alive:
             dis.fill(blue)
+            message("You lost, your score is " + str(snake.len -1) + ", type C to restart, ""Q to quit", black)
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -35,7 +47,7 @@ def gameon():
         snake.evolve()
         food.draw()
         snake.draw()
-
+        score_write(snake.len - 1)
         pygame.display.update()
 
         if food.check_life(snake.Head[0], snake.Head[1]):
