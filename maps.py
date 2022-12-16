@@ -1,3 +1,4 @@
+#The maps of rocks
 import random
 from random import randint
 
