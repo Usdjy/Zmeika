@@ -74,8 +74,7 @@ def gameon(level):
 
         while not snake.alive:  # The stage after the snake has died.
             dis.fill(blue)
-            message("You lost, your score is " + str(snake.len - 1) + ", type C to restart, ""Q to quit", black,
-                    dis_width / 40, dis_height / 3)
+            message("You lost, your score is " + str(snake.len - 1) + ", press C to restart, ""Q to quit", black, dis_width / 40, dis_height / 3)
             pygame.display.update()
 
             for event in pygame.event.get():

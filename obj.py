@@ -12,7 +12,7 @@ class Food:
     #               pts(int) - the amount of points that is given for eating this type of food
     #               x(int) - x coordinate of food's position
     #               y(int) - y coordinate of food's position
-    #               eaten(bool) - variable that is False if the piece is eaten, False otherwise
+    #               eaten(bool) - variable that is True if the piece is eaten, False otherwise
     def __init__(self, level_map):
         pos_chosen = False
         while not pos_chosen:
