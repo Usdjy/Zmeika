@@ -16,10 +16,10 @@ Reminder of the classic rules:
 When the game is finished (snake is dead), user can restart the game (press C) or quit to the menu (press Q).
 
 For developers:
-In this project we use 4 classes(button, snake, Rock, Food)
-This class represents the food that is eaten by the snake
+In this project we use 4 classes(Button, Snake, Rock, Food)
 
 Food:
+     This class represents the food that is eaten by the snake
      Attributes:
                    pts(int) - the amount of points that is given for eating this type of food
                    x(int) - x coordinate of food's position
